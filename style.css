@@ -1,0 +1,613 @@
+@font-face {
+    font-family: Rubik;
+    src: url('./assets/fonts/Rubik/Rubik-VariableFont_wght.ttf');
+}
+
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+}
+
+:root {
+    --darkblue-900: rgb(16 33 43);
+    --darkblue-800: rgb(26 43 51);
+    --darkblue-700: rgb(30 54 64);
+    --skyblue-clr: rgb(49 196 190);
+    --skyblue-shadow-clr: rgb(21 137 134);
+    --yellow-clr: rgb(242 178 54);
+    --yellow-shadow-clr: rgb(207 137 19);
+    --gray-clr: rgb(169 190 201);
+    --gray-shadow-clr: rgb(131, 146, 155);
+
+}
+
+body {
+    font-family: Rubik;
+    background-color: var(--darkblue-800);
+}
+
+.main-container {
+    display: grid;
+    width: 100%;
+    min-width: 350px;
+    max-width: 31.25rem;
+    height: 100svh;
+    padding: 1.25rem;
+    margin: 0 auto;
+}
+
+.main-container.playing .create-game-container {
+    display: none;
+}
+
+.create-game-container {
+    align-self: center;
+    display: grid;
+    grid-template-columns: auto;
+    gap: 3rem;
+}
+
+.create-game-container .x-o-logo,
+.game-container .header-section .x-o-logo {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-self: center;
+    gap: .365rem;
+
+}
+
+/* Create X icon */
+.x,
+.x::before,
+.picking-player-box .x-btn::before,
+.picking-player-box .x-btn::after,
+.x-win>span:first-child::before,
+.x-win>span:first-child::after,
+.draw>span:first-child::after,
+.draw>span:first-child::before {
+    position: relative;
+    width: 40px;
+    height: 10px;
+    border-radius: 3px;
+    background-color: var(--skyblue-clr);
+    transform: rotate(45deg);
+}
+
+.x::before,
+.picking-player-box .x-btn::after {
+    content: '';
+    position: absolute;
+    transform: rotate(-90deg);
+}
+
+/* End Create X icon */
+
+/* Create O icon */
+
+.o,
+.picking-player-box .o-btn::before,
+.o-win>span:first-child::before,
+.draw>span:nth-child(2)::before {
+    width: 35px;
+    height: 35px;
+    border: 10px solid var(--yellow-clr);
+    border-radius: 25px;
+}
+
+/* End Create O icon */
+
+/* Pick Player */
+.pick-player-section {
+    display: grid;
+    text-align: center;
+    color: var(--gray-clr);
+    background-color: var(--darkblue-700);
+    box-shadow: 0 .5rem var(--darkblue-900);
+    padding: 1.25rem;
+    gap: 1rem;
+    border-radius: 1.25rem;
+}
+
+.pick-player-section .picking-player-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 5rem;
+    padding: 0.625rem;
+    background-color: var(--darkblue-800);
+    border-radius: .625rem;
+    gap: .5rem;
+
+}
+
+
+.picking-player-box .x-btn,
+.picking-player-box .o-btn {
+    position: relative;
+    border-radius: .625rem;
+}
+
+.picking-player-box .x-btn:has(input:checked),
+.picking-player-box .o-btn:has(input:checked) {
+    background-color: var(--gray-clr);
+}
+
+.picking-player-box .x-btn,
+.picking-player-box .o-btn {
+    position: relative;
+    isolation: isolate;
+}
+
+.picking-player-box .x-btn input,
+.picking-player-box .o-btn input {
+    width: 100%;
+    height: 100%;
+    border-radius: .625rem;
+    appearance: none;
+    cursor: pointer;
+}
+
+.picking-player-box .x-btn::before,
+.picking-player-box .x-btn::after,
+.picking-player-box .o-btn::before {
+    position: absolute;
+    content: '';
+    top: 50%;
+    left: 50%;
+    z-index: -1;
+}
+
+.picking-player-box .x-btn::before {
+    background-color: var(--gray-clr);
+    transform: translate(-20px, -5px) rotate(-45deg);
+}
+
+.picking-player-box .x-btn::after {
+    background-color: var(--gray-clr);
+    transform: translate(-20px, -5px) rotate(45deg);
+}
+
+.picking-player-box .o-btn::before {
+    transform: translate(-50%, -50%);
+    border-color: var(--gray-clr);
+}
+
+.picking-player-box .x-btn:has(input:checked)::after,
+.picking-player-box .x-btn:has(input:checked)::before {
+    background-color: var(--darkblue-800);
+}
+
+.picking-player-box .o-btn:has(input:checked)::before {
+    border-color: var(--darkblue-800);
+}
+
+.pick-player-section p {
+    opacity: .75;
+    letter-spacing: 2px;
+    font-weight: 500;
+}
+
+/* End Pick Player */
+
+/* new game buttons */
+
+.new-game-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.new-game-section .new-game-vs-cpu-btn,
+.new-game-section .new-game-vs-player-btn {
+    height: 3.5rem;
+    border-radius: .875rem;
+    font-family: Rubik, sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--darkblue-800);
+}
+
+.new-game-section .new-game-vs-cpu-btn {
+    background-color: var(--yellow-clr);
+    box-shadow: 0 .5rem var(--yellow-shadow-clr);
+}
+
+.new-game-section .new-game-vs-player-btn {
+    background-color: var(--skyblue-clr);
+    box-shadow: 0 .5rem var(--skyblue-shadow-clr);
+
+}
+
+.new-game-section .new-game-vs-cpu-btn:active,
+.new-game-section .new-game-vs-player-btn:active {
+    position: relative;
+    top: .5rem;
+    box-shadow: unset;
+}
+
+/* End New Game Buttons */
+
+/* Lunched Game */
+.game-container {
+    width: 100%;
+    display: none;
+}
+
+.main-container.playing .game-container {
+    display: block;
+}
+
+.header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.player-turn {
+    color: var(--gray-clr);
+    font-weight: 600;
+    letter-spacing: 1px;
+    background-color: var(--darkblue-700);
+    display: flex;
+    align-items: center;
+    padding: .75rem 1rem;
+    border-radius: .25rem;
+    box-shadow: 0 .25rem var(--darkblue-900);
+    gap: .5rem;
+
+}
+
+.player-turn .turn {
+    position: relative;
+    width: 1.5rem;
+}
+
+.turn-x {
+    transform: translateY(-3px);
+}
+
+.turn-x::before,
+.turn-x::after {
+    content: '';
+    position: absolute;
+    width: 25px;
+    height: 6px;
+    border-radius: 2px;
+    background-color: var(--gray-clr);
+    transform: rotate(45deg);
+}
+
+.turn-x::after {
+    transform: rotate(-45deg);
+}
+
+.player-turn .turn-o::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 22px;
+    height: 22px;
+    transform: translateY(-50%);
+    border: 6px solid var(--gray-clr);
+    border-radius: 25px;
+}
+
+.retry .retry-btn {
+    width: 3rem;
+    height: 3rem;
+    background-color: var(--gray-clr);
+    border-radius: .5rem;
+    box-shadow: 0 .25rem var(--gray-shadow-clr);
+}
+
+.retry .retry-btn i {
+    color: var(--darkblue-900);
+    font-size: 1.5rem;
+}
+
+.retry .retry-btn:active {
+    position: relative;
+    top: .25rem;
+    box-shadow: unset;
+}
+
+/* Game Board */
+
+.game-board-section {
+    display: grid;
+    padding: 0 1.5rem;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: repeat(3, 7rem);
+    gap: 1.25rem;
+    margin-top: 5rem;
+}
+
+@media (max-width:425px) {
+    .game-board-section {
+        grid-template-rows: repeat(3, 5rem);
+    }
+}
+
+.game-board-section .block {
+    background-color: var(--darkblue-700);
+    box-shadow: 0 .5rem var(--darkblue-900);
+    border-radius: 1rem;
+}
+
+.game-board-section .block.active {
+    position: relative;
+    top: .5rem;
+    box-shadow: unset;
+}
+
+/* X BLOCK */
+
+.game-board-section .block.x-block::before,
+.game-board-section .block.x-block::after {
+    position: absolute;
+    content: '';
+    width: 50px;
+    height: 12px;
+    border-radius: 3px;
+    background-color: var(--skyblue-clr);
+    transform: rotate(45deg) scaleX(0);
+    transform-origin: left;
+    top: calc(50% - 20px);
+    left: calc(50% - 18px);
+    animation: x-animation-second-line .5s ease-in forwards;
+}
+
+.game-board-section .block.x-block::after {
+    content: '';
+    top: calc(50% + 15px);
+    transform: rotate(-45deg) scaleX(0);
+    animation: x-animation-first-line .5s ease-in forwards;
+    animation-delay: .5s;
+}
+
+@keyframes x-animation-first-line {
+    to {
+        transform: rotate(-45deg) scaleX(1);
+    }
+}
+
+@keyframes x-animation-second-line {
+    to {
+        transform: rotate(45deg) scaleX(1);
+    }
+}
+
+/* END X BLOCK */
+/* O BLOCK */
+@property --o-angle {
+    syntax: "<angle>";
+    inherits: false;
+    initial-value: 0deg;
+}
+
+.game-board-section .block.o-block::before {
+    position: absolute;
+    content: '';
+    width: 45px;
+    height: 45px;
+    background-image: conic-gradient(rgb(242 178 54) 0 var(--o-angle), rgb(30 54 64)var(--o-angle) 360deg);
+    border-radius: 100vw;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: o-animation 1s ease-in forwards;
+}
+
+.game-board-section .block.o-block::after {
+    position: absolute;
+    content: '';
+    width: 21px;
+    height: 21px;
+    background-color: var(--darkblue-700);
+    border-radius: 100vw;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes o-animation {
+    to {
+        --o-angle: 360deg
+    }
+}
+
+/* END O BLOCK */
+
+/* last games results */
+.last-games-results {
+    grid-row: 3/4;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
+    padding: 1.5rem;
+    gap: 1.25rem;
+}
+
+.last-games-results>* {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1rem;
+    color: var(--darkblue-800);
+    width: 100%;
+    height: 5rem;
+    font-weight: 500;
+}
+
+.last-games-results>*>:nth-child(2) {
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+
+.last-games-results .x-player {
+    background-color: var(--skyblue-clr);
+}
+
+.last-games-results .draws {
+    background-color: var(--gray-clr);
+}
+
+.last-games-results .o-player {
+    background-color: var(--yellow-clr);
+}
+
+/* CURRENT GAME RESULT */
+.current-game-result-container,
+.restart-game-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100svh;
+    background-color: rgba(0, 0, 0, .4);
+}
+
+.current-game-result-container.ongoing {
+    display: none;
+}
+
+.current-game-result,
+.restart-game {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: calc(100% + 1.25rem);
+    top: 50%;
+    left: -1.25rem;
+    transform: translateY(-50%);
+    padding-block: 3rem;
+    background-color: var(--darkblue-700);
+    gap: 1.5rem;
+}
+
+.game-result {
+    color: var(--gray-clr);
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.game-winner {
+    display: flex;
+    gap: .5rem;
+}
+
+.game-winner>span:last-child {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.x-win>span:last-child {
+    color: var(--skyblue-clr);
+}
+
+.o-win>span:last-child {
+    color: var(--yellow-clr);
+}
+
+.game-winner>span:first-child {
+    position: relative;
+    width: 40px;
+    height: 40px;
+}
+
+.x-win>span:first-child::after,
+.x-win>span:first-child::before,
+.draw>span:first-child::after,
+.draw>span:first-child::before {
+    content: '';
+    position: absolute;
+    background-color: var(--skyblue-clr);
+    top: calc(50% - 3px);
+    left: 0;
+}
+
+.x-win>span:first-child::after,
+.draw>span:first-child::after {
+    transform: rotate(-45deg);
+}
+
+.o-win>span:first-child::before,
+.draw>span:nth-child(2)::before {
+    content: '';
+    position: absolute;
+    top: 2.5px;
+
+}
+
+/* Draw result */
+.draw>span:first-child,
+.draw>span:nth-child(2) {
+    position: relative;
+    width: 40px;
+    height: 40px;
+}
+
+.draw>span:last-child {
+    color: var(--gray-clr);
+}
+
+/*  */
+.quit-and-next-round,
+.restart-buttons {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 1rem;
+}
+
+.quit-btn,
+.next-round-btn,
+.restart-buttons .yes,
+.restart-buttons .no {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--darkblue-700);
+    padding: .75rem;
+    border-radius: .5rem;
+}
+
+.quit-btn,
+.restart-buttons .no {
+    background-color: var(--gray-clr);
+    box-shadow: 0 0.25rem var(--gray-shadow-clr);
+}
+
+.next-round-btn,
+.restart-buttons .yes {
+    background-color: var(--yellow-clr);
+    box-shadow: 0 0.25rem var(--yellow-shadow-clr);
+}
+
+.next-round-btn:active,
+.quit-btn:active,
+.restart-buttons .yes:active,
+.restart-buttons .no:active {
+    position: relative;
+    top: .25rem;
+    box-shadow: unset;
+}
+
+/* RESTART GAME */
+.restart-game-container.hide {
+    display: none;
+}
+
+.restart-game h2 {
+    color: var(--gray-clr);
+    letter-spacing: 2px;
+}

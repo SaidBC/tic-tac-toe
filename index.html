@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+    <title>TIC TAC TOE</title>
+</head>
+
+<body>
+    <div class="main-container">
+        <div class="create-game-container">
+            <div class="x-o-logo">
+                <div class="x"></div>
+                <div class="o"></div>
+            </div>
+            <div class="pick-player-section">
+                <h3>PICK PLAYER 1'S MARK</h3>
+                <div class="picking-player-box">
+                    <div class="x-btn">
+                        <input type="radio" name="player-option" value="x">
+                    </div>
+                    <div class="o-btn">
+                        <input type="radio" name="player-option" value="o">
+                    </div>
+                </div>
+                <p>REMEMBER : X GOES FIRST</p>
+            </div>
+            <div class="new-game-section">
+                <button type="button" class="new-game-vs-cpu-btn">NEW GAME (VS CPU)</button>
+                <button type="button" class="new-game-vs-player-btn">NEW GAME (VS PLAYER)</button>
+            </div>
+        </div>
+        <div class="game-container">
+            <div class="header-section">
+                <div class="x-o-logo">
+                    <span class="x"></span>
+                    <span class="o"></span>
+                </div>
+                <div class="player-turn">
+                    <span class="turn turn-x"></span>
+                    <span>TURN</span>
+                </div>
+                <div class="retry">
+                    <button type="button" class="retry-btn"><i class="fa-solid fa-rotate-right"></i></button>
+                </div>
+            </div>
+            <div class="game-board-section">
+
+            </div>
+            <div class="last-games-results">
+                <div class="x-player">
+                    <span>X (You)</span>
+                    <span>0</span>
+                </div>
+                <div class="draws">
+                    <span>TIES</span>
+                    <span>0</span>
+                </div>
+                <div class="o-player">
+                    <span>O (CPU)</span>
+                    <span>0</span>
+                </div>
+            </div>
+            <div class="current-game-result-container ongoing">
+                <div class="current-game-result">
+                    <div class="game-result"></div>
+                    <div class="game-winner "><span></span><span></span><span>TAKES THE ROUND</span></div>
+                    <div class="quit-and-next-round">
+                        <button class="quit-btn">QUIT</button>
+                        <button class="next-round-btn">NEXT ROUND</button>
+                    </div>
+                </div>
+            </div>
+            <div class="restart-game-container hide">
+                <div class="restart-game">
+                    <h2>RESTART GAME?</h2>
+                    <div class="restart-buttons">
+                        <button class="no">NO, CANCEL</button>
+                        <button class="yes">YES, RESTART</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
