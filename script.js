@@ -56,12 +56,14 @@ const LaunchGame = (yourChoise, mode) => {
                 blocks[[].concat(board[0], board[1], board[2]).indexOf(0, Math.floor(Math.random() * 8))].click()
             }, 200);
         }
+        console.log('its me mario')
     }
-    nextRoundBtn.addEventListener('click', resetBoard)
+    nextRoundBtn.onclick = resetBoard
 
     //  RESTART GAME
     restartBtn.onclick = () => {
         restartGameContainer.classList.remove('hide')
+        console.log('its me mario from reset')
     }
     restartBtnNo.onclick = () => {
         restartGameContainer.classList.add('hide')
